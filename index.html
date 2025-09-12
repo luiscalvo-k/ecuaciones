@@ -1,0 +1,1104 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ecuaciones — Info</title>
+  <style>
+/* 🌟 Variables principales */
+:root {
+  --bg: #ffffff;
+  --bg-image: url('assets/fondo2.jpg');
+  --accent: #6366f1; /* morado/azul */
+  --accent-light: #a5b4fc;
+  --text-dark: #0f172a;
+  --shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* 🌟 Configuración global */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--bg);
+  margin: 0;
+  color: var(--text-dark);
+  line-height: 1.6;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* 🌟 Navegación */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.nav a:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+}
+
+/* 🌟 Hero (Portada) */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 4rem 2rem;
+  min-height: 80vh;
+  backdrop-filter: blur(6px);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: var(--accent);
+  animation: fadeDown 1s ease-out;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  animation: fadeDown 1.3s ease-out;
+}
+
+/* 🌟 Cards / Secciones */
+section.card.info {
+  display: none;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+section.card.info.active {
+  display: block;
+  animation: fadeUp 0.8s ease-in-out;
+}
+
+section.card.info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* 🌟 Títulos */
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+/* 🌟 Animaciones */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🌟 Botones */
+button, .btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover, .btn:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+}
+
+/* 🌟 Responsivo */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+
+/* --- Menú principal horizontal --- */
+.nav nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+.nav nav ul li {
+  position: relative; /* necesario para el dropdown */
+}
+
+.nav nav ul li a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: var(--text-dark);
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.nav nav ul li a:hover {
+  background: var(--accent-light);
+}
+
+/* --- Dropdown oculto por defecto --- */
+.nav .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+  min-width: 220px;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  z-index: 100;
+}
+
+/* --- Enlaces dentro del dropdown --- */
+.nav .dropdown-menu a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.nav .dropdown-menu a:hover {
+  background: var(--accent-light);
+}
+
+/* --- Mostrar dropdown al pasar el mouse en escritorio --- */
+.nav ul li:hover > .dropdown-menu {
+  display: block;
+}
+
+/* --- Hamburguesa oculta en escritorio --- */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* --- Responsive (móvil) --- */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    margin-right: 1rem;
+  }
+
+  .nav nav ul {
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.95);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    display: none; /* oculto por defecto */
+    border-radius: 8px;
+    padding: 1rem 0;
+  }
+
+  .nav nav ul.show {
+    display: flex;
+  }
+
+  .nav .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: transparent;
+    padding-left: 1rem;
+  }
+
+  .nav ul li:hover > .dropdown-menu {
+    display: none; /* en móvil solo con clic */
+  }
+}
+
+
+
+
+
+/* evitar que el nav recorte el dropdown */
+.nav, header, .container, main {
+  overflow: visible;
+}
+
+/* dropdown por encima del contenido */
+.nav .dropdown-menu {
+  z-index: 9999;
+}
+
+/* clase que fuerza ocultar el dropdown (vence al :hover) */
+.nav .dropdown-menu.force-close {
+  display: none !important;
+}
+
+
+    
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="nav">
+        <!-- <div class="brand">
+          <div class="logo">E</div>
+          <div class="name">
+            <strong>Ecuaciones</strong><div style="font-size:12px;color:var(--muted)">Guía rápida</div>
+          </div>
+        </div> -->
+
+        <nav>
+          <button class="hamburger" aria-label="menu" id="hamb">☰</button>
+          <ul id="mainNav">
+
+
+
+            <li><a href="#inicio">Inicio</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle">Ecuaciones lineales▾</a>
+              <div class="dropdown-menu" data-menu="lineales">
+                <a href="#que-son-lineales">Qué son</a>
+                <a href="#ecua-lineal1">Ecuación lineal con una variable</a>
+                <a href="#ecua-lineal2">Ecuación lineal con dos variables</a>
+                <a href="#ecua-lineal-ejemplo1">Ejemplo con una variable</a>
+                <a href="#ecua-lineal-ejemplo2">Ejemplo con dos variables</a>
+              </div>
+            </li>
+
+
+            <li class="dropdown">
+              <a class="dropdown-toggle">Aplicacion de ecuaciones lineales▾</a>
+              <div class="dropdown-menu" data-menu="lineales">
+                <a href="#vida-coti">Vida cotidiana</a>
+                <a href="#interes-simp">Finanzas (Calculo de interes simple) </a>
+                <a href="#ap-sistema-ecua-variable">Aplicación de sistema de ecuaciones lineal con dos variable</a>
+              </div>
+            </li>
+
+
+            <li class="dropdown">
+              <a class="dropdown-toggle">Ecuaciones cuadráticas ▾</a>
+              <div class="dropdown-menu" data-menu="cuadraticas">
+                <a href="#que-son-cuadratica">Qué son</a>
+                <a href="#metodos-resolucion">metodos de resolución</a>
+                <a href="#ejemplo-cuadratica-completa">Ejemplo ecuación cuadratica completa</a>
+                <a href="#ejemplo-cuadratica-indepen">Ejemplo ecuación cuadratica incompleta sin el termino Independientemente</a>
+                <a href="#ejemplo-cuadratica-inco-lineal">Ejemplo ecuación cuadratica incompleta sin el termino lineal</a>
+              </div>
+            </li>
+
+
+            <li class="dropdown">
+              <a class="dropdown-toggle">Aplicación de ecuaciones cuadraticas ▾</a>
+              <div class="dropdown-menu" data-menu="lineales">
+                <a href="#app-incompleta-finanza">Aplicación de ecuación cuadratica  completa en finanza</a>
+                <a href="#app-incompleta-ing">Aplicacion de ecuación cuadratica incompleta en ingenieria</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+
+
+
+       <section id="inicio" class="card info" style="margin-top:18px">
+
+         <section class="hero">
+           <h1>EL MUNDO DE LAS ECUACIONES</h1>
+  
+   <p>
+      <h2>Ecuaciones Lineales y Cuadráticas</h2>
+Las ecuaciones constituyen la base fundamental de la resolución de problemas, no solo en matemáticas, sino también en la vida cotidiana y en todas las ramas de la ciencia y la ingeniería. Nos permiten representar de manera simbólica y estructurada relaciones entre diferentes cantidades y fenómenos, lo que nos ayuda a entender cómo interactúan las variables en distintos contextos. A través de las ecuaciones podemos modelar situaciones del mundo real, analizar fenómenos complejos, predecir comportamientos y tomar decisiones fundamentadas basadas en datos y relaciones matemáticas claras. Desde calcular la trayectoria de un proyectil, optimizar procesos industriales, hasta diseñar sistemas de control o planificar finanzas, las ecuaciones nos ofrecen herramientas precisas para cuantificar y resolver problemas de manera eficiente. En esta infografía exploraremos en detalle las ecuaciones lineales y ecuaciones cuadráticas, abordando sus métodos de solución, aplicaciones prácticas, ejemplos paso a paso y representaciones gráficas. Nuestro objetivo es que comprendas no solo cómo se resuelven, sino también por qué son tan útiles y cómo se aplican en la vida real y en distintas áreas de la ingeniería y la ciencia. A través de un enfoque visual y didáctico, aprenderás a identificar los diferentes tipos de ecuaciones y sus componentes, aplicar métodos de resolución paso a paso, incluyendo factorización, fórmula general y técnicas gráficas, interpretar los resultados en contextos prácticos y reales, y comprender cómo las ecuaciones permiten predecir, optimizar y diagnosticar problemas en múltiples escenarios. Esta guía visual te permitirá no solo entender las ecuaciones, sino también apreciarlas como herramientas poderosas para el análisis y la toma de decisiones en la ingeniería, la ciencia y la vida cotidiana.
+</p>
+
+      </section>
+      </section>
+
+      <section id="que-son-lineales" class="card info" style="margin-top:18px">
+        <div class="kicker">Ecuaciones lineales</div>
+        <h2>¿Qué son?</h2>
+        <p>Una ecuación lineal</strong> es una igualdad que involucra una o más variables donde cada término con
+          variable es de grado 1. Ejemplo: <code>2x + 3 = 7</code>.</p>
+        <p>En general, una ecuación lineal en una variable tiene la forma <code>ax + b = 0</code>, donde <em>a</em> y
+          <em>b</em> son constantes y <em>a ≠ 0</em>.</p>
+        <p><strong>Grado de la ecuación:</strong> siempre es de primer grado (exponente máximo de la variable = 1).</p>
+        <p> <strong>Número de soluciones:</strong>En una ecuación lineal con una variable, siempre hay una única
+          solución.</p>
+        <p>En ecuaciones lineales con dos variables (ax + by + c = 0), la solución es un conjunto de infinitos puntos
+          que forman una recta.</p>
+        </p>
+      </section>
+
+      <section id="ecua-lineal1" class="card info" style="margin-top:12px">
+
+        <p><strong>Ecuación lineal con una variable</strong><br><br>
+          Una <strong>ecuación lineal con una variable</strong> es una igualdad matemática en la que interviene
+          únicamente
+          una incógnita (generalmente representada por x), cuyo exponente máximo es 1.
+          Se le llama <em>lineal</em> porque, si se representara gráficamente, sus soluciones corresponden a puntos
+          alineados en la recta numérica.<br><br>
+
+          Su forma general es: <strong> <em> ax + b = 0 </em></strong>, donde:<br>
+          - a y b son números reales.<br>
+          - a ≠ 0, porque si a = 0
+          ya no existiría la variable y la ecuación dejaría de ser lineal.
+          Resolverla consiste en <em>aislar la incógnita</em> aplicando operaciones aritméticas inversas
+          (suma, resta, multiplicación o división) hasta encontrar el valor único de la variable.<br>
+          Este tipo de ecuaciones son fundamentales en el álgebra y tienen muchas aplicaciones en la vida real,
+          como calcular precios, resolver problemas de proporcionalidad o determinar valores desconocidos en diferentes
+          contextos.
+        </p>
+      </section>
+
+
+      <section id="ecua-lineal2" class="card info" style="margin-top:12px">
+      <h3> <strong>Tipos</strong> </h3>
+
+
+        <p><strong>Ecuación lineal con dos variables</strong><br>
+        <p>Una <strong>ecuación lineal con dos variables</strong> es una expresión algebraica de primer grado que
+          relaciona dos incógnitas, generalmente x e y, y tiene la forma general <strong> <em>ax + by + c = 0</em>
+          </strong>
+          con a, b ∈ ℝ y a y b no nulos; el conjunto de soluciones son todos los pares ordenados (x, y) que satisfacen
+          la ecuación y, al representarlos en el plano cartesiano, forman una recta.
+          Para resolver un sistema de dos ecuaciones lineales con dos incógnitas existen varios métodos: </p>
+
+        <p><strong>el método de sustitución: </strong>Despejar una variable y sustituirla en la otra ecuación</p>
+        <p><strong>el método de igualación: </strong>Despejar la misma variable en ambas ecuaciones y igualar las
+          expresiones</p>
+        <p><strong>el método de reducción o eliminación: </strong>Multiplicar y sumar o restar las ecuaciones para
+          eliminar una variable</p>
+        <p><strong>el método gráfico: </strong>Representar cada ecuación como recta y tomar su punto de intersección.
+          Según las soluciones, un sistema puede ser compatible determinado
+          (una única solución —rectas que se cruzan en un punto—), compatible indeterminado (infinitas soluciones
+          —rectas coincidentes—) o incompatible (sin solución —rectas paralelas—).</p>
+      </section>
+
+
+
+
+
+
+
+      <section id="ecua-lineal-ejemplo1" class="card info" style="margin-top:12px">
+        <h2>Ejemplo resuelto</h2>
+        <h3 style="margin-top:10px">Ecuación lineal con una variable</h3>
+        <p><strong>ejemplo 1: </strong></p>
+        <p>Resolver <code>2x + 3 = 7</code>:</p>
+        <ol>
+          <li>Restar 3: <code>2x = 4</code></li>
+          <li>Dividir por 2: <code>x = 2</code></li>
+        </ol>
+        <p>
+        <p><strong>ejemplo 2: </strong></p>
+        Resolver la ecuación:
+        3x + 6 = 0
+        1️ Restar 6 a ambos lados:
+        3x = -6
+        2️ Dividir entre 3:
+        x = -2
+        <strong>Solución:</strong> x = -2
+        </p>
+      </section>
+
+      <section id="ecua-lineal-ejemplo2" class="card info" style="margin-top:18px">
+        <h3 style="margin-top:10px">Ejemplo de sistema de ecuaciones lineales con dos variables</h3>
+
+        <p>
+        <p>
+
+
+        <h3 style="margin-top:10px">Ecuación lineal dos variables</h3>
+
+        <p>
+          <b>Ejemplo de ecuación lineal con dos variables:</b> 2X + 3Y = 12
+        </p>
+
+        <p>
+          Esta es una ecuación lineal con dos incógnitas (X y Y). Sus soluciones son pares ordenados (X, Y) que hacen
+          verdadera la igualdad, y todas ellas representan una <b>línea recta en el plano cartesiano</b>.
+        </p>
+
+        <p>
+          <b>Resolución simple:</b>
+        <ul>
+          <li>
+            Si <b>X = 0</b>: <br>
+            2(0) + 3Y = 12 ⟹ 3Y = 12 ⟹ Y = 4 <br>
+            Punto resultante: <b>(0,4)</b>
+          </li>
+          <li>
+            Si <b>Y = 0</b>: <br>
+            2X + 3(0) = 12 ⟹ 2X = 12 ⟹ X = 6 <br>
+            Punto resultante: <b>(6,0)</b>
+          </li>
+        </ul>
+        </p>
+
+        <p>
+          Uniéndo los puntos <b>(0,4)</b> y <b>(6,0)</b> en el plano cartesiano, se obtiene la recta que representa
+          todas las soluciones posibles de la ecuación.
+        </p>
+
+        <p>
+          <b>Conclusión:</b> Una ecuación lineal con dos variables no tiene una sola solución, sino infinitas, ya que
+          cada punto de la recta es válido.
+        </p>
+
+        <p>
+          <b>Ejemplos de soluciones:</b> (0,4), (6,0), (3,2) y (1, 10/3)
+        </p>
+        </p>
+
+        <strong> Consideremos el siguiente sistema: </strong>
+        <br>
+        <b>(1)</b> 2x + y = 8 <br>
+        <b>(2)</b> x - y = 1
+        </p>
+
+        <h3>Método de Sustitución</h3>
+        <p>
+          De la ecuación (2) se despeja: <b>x = y + 1</b>.
+          Sustituyendo en (1): <b>2(y + 1) + y = 8</b> → <b>3y + 2 = 8</b> → <b>y = 2</b>.
+          Luego: <b>x = 2 + 1 = 3</b>.
+          Por tanto, la solución es <b>(3, 2)</b>.
+        </p>
+
+        <h3>Método de Igualación</h3>
+        <p>
+          De la ecuación (1): <b>y = 8 - 2x</b>.
+          De la ecuación (2): <b>y = x - 1</b>.
+          Igualando: <b>8 - 2x = x - 1</b> → <b>3x = 9</b> → <b>x = 3</b>.
+          Sustituyendo: <b>y = 3 - 1 = 2</b>.
+          La solución es <b>(3, 2)</b>.
+        </p>
+
+        <h3>Método de Reducción</h3>
+        <p>
+          Sumando las ecuaciones (1) y (2): <b>(2x + y) + (x - y) = 8 + 1</b> → <b>3x = 9</b> → <b>x = 3</b>.
+          Con este valor en (2): <b>3 - y = 1</b> → <b>y = 2</b>.
+          La solución es <b>(3, 2)</b>.
+        </p>
+
+        <h3>Método Gráfico</h3>
+        <p>
+          La ecuación (1) puede escribirse como <b>y = 8 - 2x</b> y la ecuación (2) como <b>y = x - 1</b>.
+          Al representarlas en un plano cartesiano, las rectas se intersectan en el punto <b>(3, 2)</b>,
+          que corresponde a la solución del sistema.
+        </p>
+
+        <h3>Conclusión</h3>
+        <p>
+          Independientemente del método empleado (sustitución, igualación, reducción o gráfico),
+          la solución única del sistema de ecuaciones es el par ordenado: <b>(3, 2)</b>.
+        </p>
+
+
+      </section>
+
+
+      <section id="vida-coti" class="card info" style="margin-top:18px">
+        <h3 style="margin-top:10px">Vida cotidiana</h3>
+        <h2></h2>
+        <p>Un coche viaja a una velocidad constante de 60 km/h. Si recorre una distancia de 180 km, ¿cuánto tiempo
+          tarda?</p>
+        <p>Planteamos la ecuación lineal de una variable:</p>
+        <p>Sabemos que: <br>
+          <strong>Distancia = Velocidad ⋅ Tiempo</strong>
+        </p>
+        <p>Sea <strong>t</strong> el tiempo en horas.</p>
+        <p>180 = 60 ⋅ t</p>
+        <p>Resolviendo:</p>
+        <p>t = 180 / 60</p>
+        <p><strong>t = 3</strong></p>
+        <p>El coche tarda 3 horas en llegar a su destino.</p>
+      </section>
+
+      <section id="interes-simp" class="card info" style="margin-top:18px">
+        <div class="kicker">Finanzas (Calculo de interes simple)</div>
+        <h3 style="margin-top:10px">Finanzas (Calculo de interes simple)</h3>
+        <p>Fórmula de interés simple:</p>
+        <p><strong>I = C ⋅ R ⋅ T</strong></p>
+        <p>donde:</p>
+        <ul>
+          <li><strong>I</strong> = interés generado</li>
+          <li><strong>C</strong> = capital (dinero invertido o prestado)</li>
+          <li><strong>R</strong> = tasa de interés (en forma decimal)</li>
+          <li><strong>T</strong> = tiempo</li>
+        </ul>
+        <p>Ejemplo con ecuación lineal de una sola variable:</p>
+        <p>Un inversionista deposita $5.000.000 a una tasa del 8% anual durante 2 años. Queremos calcular el interés
+          generado.</p>
+        <p>Planteamos la ecuación:</p>
+        <p><strong>I = C ⋅ R ⋅ T</strong></p>
+        <p>Sustituimos:</p>
+        <p>I = 5.000.000 ⋅ 0.08 ⋅ 2</p>
+        <p><strong>I = 800.000</strong></p>
+        <p>El interés generado es $800.000.</p>
+      </section>
+
+      <section id="ap-sistema-ecua-variable"class="card info" style="margin-top:18px">
+        <h3 style="margin-top:10px">Aplicación de sistema de ecuaciones lineal con dos variable</h3>
+       <p>Un cine vendió 200 boletas en total. Las boletas de adulto cuestan 10.000 pesos y las de niño 5.000 pesos. La taquilla recaudó 1.500.000 pesos. Queremos determinar cuántas boletas de cada tipo se vendieron.</p>
+
+      <h3>1. Planteamos las ecuaciones</h3>
+      <ul>
+        <li>Sea <strong>x</strong> el número de boletas de adultos y <strong>y</strong> el número de boletas de niños.</li>
+        <li>Ecuación del número de boletas: x + y = 200</li>
+        <li>Ecuación del dinero recaudado: 10.000x + 5.000y = 1.500.000</li>
+      </ul>
+
+      <h3>2. Simplificamos la segunda ecuación</h3>
+      <ul>
+        <li>Dividimos toda la ecuación entre 5.000: 2x + y = 300</li>
+      </ul>
+
+      <h3>3. Sistema de ecuaciones resultante</h3>
+      <ul>
+        <li>x + y = 200</li>
+        <li>2x + y = 300</li>
+      </ul>
+
+      <h3>4. Resolución por el método de reducción</h3>
+      <ul>
+        <li>Restamos la primera ecuación de la segunda: (2x + y) - (x + y) = 300 - 200</li>
+        <li>Esto nos da: x = 100</li>
+      </ul>
+
+      <h3>5. Sustituimos en la primera ecuación</h3>
+      <ul>
+        <li>x + y = 200</li>
+        <li>100 + y = 200 → y = 100</li>
+      </ul>
+
+      <h3>Respuesta final</h3>
+      <p>Boletas de adultos: <strong>100</strong></p>
+      <p>Boletas de niños: <strong>100</strong></p>
+
+      </section>
+
+
+
+
+
+
+
+
+
+ <section id="que-son-cuadratica" class="card info" style="margin-top:18px">
+        <h2>¿Qué son?</h2>
+
+        <p>
+  <strong>¿Qué son las Ecuaciones Cuadráticas?</strong><br>
+  Una ecuación cuadrática es una igualdad algebraica de la forma: <br>
+  ax² + bx + c = 0 (donde a ≠ 0).
+</p>
+
+<p>
+  <strong>Características principales:</strong><br>
+  - Son polinomios de segundo grado.<br>
+  - Su gráfica es una parábola.<br>
+  - Pueden tener dos, una o ninguna solución real, según el discriminante Δ = b² – 4ac.
+</p>
+
+<p>
+  <strong>Tipos de Ecuaciones Cuadráticas</strong>
+</p>
+
+<p>
+  <strong>Completas:</strong> Tienen la forma ax² + bx + c = 0.<br>
+  <strong>Ejemplo:</strong> x² + 5x + 6 = 0
+</p>
+
+<p>
+  <strong>Incompletas:</strong> Les falta el término <code>b</code> o <code>c</code>.<br>
+  <strong>Ejemplo:</strong> <code>x² − 9 = 0</code>
+</p>
+</section>
+
+
+
+<section id="metodos-resolucion" class="card info" style="margin-top:18px">
+        <h2>Metodos de resolución</h2>
+        <p>
+  <strong>Métodos de Solución de las Ecuaciones Cuadráticas</strong><br>
+  Una ecuación cuadrática es de la forma: <br>
+  <code>ax² + bx + c = 0</code> (donde <code>a ≠ 0</code>)
+</p>
+
+<p>
+  <strong>1. Factorización</strong><br>
+  Se descompone el trinomio en dos binomios.<br>
+  Ejemplo: <code>x² + 5x + 6 = (x + 2)(x + 3) = 0</code><br>
+  ➡ Soluciones: <code>x = −2</code>, <code>x = −3</code>
+</p>
+
+<p>
+  <strong>2. Fórmula General </strong><br>
+   Método universal, siempre funciona.<br>
+  <code>x = (-b ± √(b² − 4ac)) / 2a</code>
+</p>
+
+<p>
+  <strong>3. Completación de Cuadrados</strong><br>
+  Se transforma el trinomio en un cuadrado perfecto.<br>
+  Ejemplo: <code>x² + 6x + 5 = 0</code><br>
+  <code>(x + 3)² = 4 ⇒ x = −3 ± 2</code>
+</p>
+
+<p>
+  <strong>4. Gráfica de la Parábola</strong><br>
+  Las soluciones son los puntos donde la parábola corta el eje X.<br>
+  - 2 soluciones reales → corta en 2 puntos.<br>
+  - 1 solución real → toca en 1 punto.<br>
+  - 0 soluciones reales → no corta.
+</p>
+
+<p>
+  <strong>🔹 5. Método de Viète </strong><br>
+  Relaciona los coeficientes de la ecuación con las raíces.<br>
+  Para <code>ax² + bx + c = 0</code>:<br>
+  Suma de raíces: <code>x₁ + x₂ = −b / a</code><br>
+  Producto de raíces: <code>x₁ · x₂ = c / a</code><br>
+  Ejemplo: <code>x² − 5x + 6 = 0</code><br>
+  Suma: <code>x₁ + x₂ = 5</code>, Producto: <code>x₁ · x₂ = 6</code><br>
+  Raíces: <code>x₁ = 2</code>, <code>x₂ = 3</code>
+</p>
+
+</section>
+
+
+<section id="ejemplo-cuadratica-completa" class="card info" style="margin-top:18px">
+        <h2>Completa</h2>
+
+       <p>
+  <strong>Ecuación Cuadrática Completa:</strong><br>
+  <code>x² − 5x + 6 = 0</code>
+</p>
+
+<p>
+  <strong>1) Factorización:</strong><br>
+  Buscamos dos números cuya suma sea -5 y cuyo producto sea 6.<br>
+  Números: -2 y -3 → suma -5, producto 6.<br>
+  Entonces: <code>x² − 5x + 6 = (x − 2)(x − 3) = 0</code>.<br>
+  Por la propiedad del producto cero:<br>
+  <code>x − 2 = 0 ⇒ x = 2</code><br>
+  <code>x − 3 = 0 ⇒ x = 3</code>
+</p>
+
+<p>
+  <strong>2) Fórmula Cuadrática:</strong><br>
+  Fórmula: <code>x = (-b ± √(b² − 4ac)) / 2a</code><br>
+  Con a = 1, b = -5, c = 6.<br>
+  Discriminante: Δ = b² − 4ac = (-5)² − 4·1·6 = 1<br>
+  Sustituyendo: x = (5 ± 1) / 2 → x = 3 o x = 2
+</p>
+
+<p>
+  <strong>3) Completar el cuadrado:</strong><br>
+  Partimos de: <code>x² − 5x + 6 = 0</code><br>
+  Movemos el 6: <code>x² − 5x = -6</code><br>
+  Mitad de -5: -5/2, elevado al cuadrado: 25/4<br>
+  Sumamos ambos lados: <code>x² − 5x + 25/4 = -6 + 25/4 = 1/4</code><br>
+  Lado izquierdo es un cuadrado perfecto: <code>(x − 5/2)² = 1/4</code><br>
+  Raíz: <code>x − 5/2 = ±1/2</code> → <code>x = 3</code> o <code>x = 2</code>
+</p>
+
+<p>
+  <strong>4) Relaciones de Viète:</strong><br>
+  Para a = 1: suma de raíces x₁ + x₂ = -b/a = 5, producto x₁·x₂ = c/a = 6<br>
+  Buscando dos números que sumen 5 y producto 6 → x₁ = 2, x₂ = 3
+</p>
+
+<p>
+  <strong>5) Análisis Geométrico (vértice y gráfica):</strong><br>
+  Parabola y = x² − 5x + 6<br>
+  Intersecciones con el eje x: x = 2 y x = 3<br>
+  Vértice: xᵥ = -b/2a = 5/2 = 2.5<br>
+  Evaluando y: yᵥ = (2.5)² − 5(2.5) + 6 = −0.25<br>
+  Vértice en (2.5, −0.25), mínimo porque a > 0
+</p>
+
+<p>
+  <strong>Resultado final (común a todos los métodos):</strong><br>
+  <code>x = 2</code> o <code>x = 3</code>
+</p>
+
+</section>
+
+
+<section id="ejemplo-cuadratica-indepen" class="card info" style="margin-top:18px">
+        <h2>Ecuación Cuadrática Incompleta sin el termino Independientemente</h2>
+<p>
+  <strong>Ecuación Cuadrática Incompleta sin el termino Independientemente:</strong><br>
+  <code>x² − 4x = 0</code>
+</p>
+
+<p>
+  <strong>1) Factorización:</strong><br>
+  Sacamos factor común x:<br>
+  <code>x(x − 4) = 0</code><br>
+  Por la propiedad del producto cero:<br>
+  <code>x = 0</code> o <code>x − 4 = 0 ⇒ x = 4</code>
+</p>
+
+<p>
+  <strong>2) Fórmula Cuadrática:</strong><br>
+  Para a = 1, b = -4, c = 0:<br>
+  <code>x = (-b ± √(b² − 4ac)) / 2a = (4 ± √16) / 2 = (4 ± 4)/2</code><br>
+  Soluciones: <code>x = 4</code> o <code>x = 0</code>
+</p>
+
+<p>
+  <strong>3) Completar el cuadrado:</strong><br>
+  Partimos de: <code>x² − 4x = 0</code><br>
+  Añadimos (4/2)² = 4 a ambos lados: <code>x² − 4x + 4 = 4</code><br>
+  Lado izquierdo como cuadrado perfecto: <code>(x − 2)² = 4</code><br>
+  Raíz: <code>x − 2 = ±2</code> → <code>x = 4</code> o <code>x = 0</code>
+</p>
+
+<p>
+  <strong>4) Relaciones de Viète:</strong><br>
+  Para a = 1: suma de raíces x₁ + x₂ = -b/a = 4, producto x₁·x₂ = c/a = 0<br>
+  Dos números con suma 4 y producto 0 → x₁ = 0, x₂ = 4
+</p>
+
+<p>
+  <strong>5) Análisis Geométrico (vértice y gráfica):</strong><br>
+  Parabola: y = x² − 4x<br>
+  Intersecciones con el eje x: x = 0 y x = 4<br>
+  Vértice: xᵥ = -b/2a = 2, yᵥ = 2² − 4·2 = −4<br>
+  Vértice en (2, −4), mínimo porque a > 0
+</p>
+
+<p>
+  <strong>Resultado final (común a todos los métodos):</strong><br>
+  <code>x = 0</code> o <code>x = 4</code>
+</p>
+
+</section>
+
+
+<section id="ejemplo-cuadratica-inco-lineal" class="card info" style="margin-top:18px">
+        <h2>Ecuación Cuadrática Incompleta sin termino lineal</h2>
+<p>
+  <strong>Ecuación Cuadrática Incompleta sin termino lineal:</strong><br>
+  <code>x² − 9 = 0</code>
+</p>
+
+<p>
+  <strong>1) Raíz cuadrada / Propiedad de potencias:</strong><br>
+  <code>x² − 9 = 0 ⇒ x² = 9 ⇒ x = ±3</code>
+</p>
+
+<p>
+  <strong>2) Factorización (diferencia de cuadrados):</strong><br>
+  <code>x² − 9 = (x − 3)(x + 3) = 0</code><br>
+  Por la propiedad del producto cero:<br>
+  <code>x − 3 = 0 ⇒ x = 3</code><br>
+  <code>x + 3 = 0 ⇒ x = −3</code>
+</p>
+
+<p>
+  <strong>3) Fórmula Cuadrática:</strong><br>
+  Para a = 1, b = 0, c = −9:<br>
+  <code>x = (-b ± √(b² − 4ac)) / 2a = (0 ± √36)/2 = ±3</code>
+</p>
+
+<p>
+  <strong>4) Completar el cuadrado:</strong><br>
+  Partimos de <code>x² − 9 = 0</code> → <code>x² = 9</code><br>
+  Lado izquierdo como cuadrado perfecto: <code>(x − 0)² = 9</code><br>
+  Raíz: <code>x = ±3</code>
+</p>
+
+<p>
+  <strong>5) Relaciones de Viète:</strong><br>
+  Suma de raíces: x₁ + x₂ = −b/a = 0 → raíces opuestas<br>
+  Producto de raíces: x₁·x₂ = c/a = −9<br>
+  Dos números opuestos cuyo producto es −9 → x₁ = 3, x₂ = −3
+</p>
+
+<p>
+  <strong>6) Análisis Geométrico (vértice y gráfica):</strong><br>
+  Parabola: y = x² − 9<br>
+  Intersecciones con el eje x: x = −3 y x = 3<br>
+  Vértice: xᵥ = −b/2a = 0, yᵥ = −9<br>
+  Vértice en (0, −9), mínimo porque a > 0
+</p>
+
+<p>
+  <strong>Resultado final (común a todos los métodos):</strong><br>
+  <code>x = −3</code> o <code>x = 3</code>
+</p>
+
+</section>
+
+<section id="app-incompleta-finanza" class="card info" style="margin-top:18px">
+        <h2>Ecuación Cuadrática Incompleta finanza</h2>
+<p><strong>Cuadrática completa (Finanzas: hallar la TIR)</strong></p>
+
+<p>Contexto: Inviertes $1000 y recibes $600 al final del año 1 y $600 al final del año 2. La TIR <strong>r</strong> satisface:</p>
+
+<p>1000 = 600 / (1 + r) + 600 / (1 + r)<sup>2</sup></p>
+
+<p><strong>Paso 1 — Multiplicar por (1 + r)<sup>2</sup> para eliminar denominadores:</strong></p>
+
+<p>1000 (1 + r)<sup>2</sup> = 600 (1 + r) + 600</p>
+
+<p>Expandimos la izquierda: (1 + r)<sup>2</sup> = 1 + 2r + r<sup>2</sup>, entonces:</p>
+
+<p>1000 (1 + 2r + r<sup>2</sup>) = 600 (1 + r) + 600</p>
+
+<p>1000 + 2000r + 1000r<sup>2</sup> = 600 + 600r + 600</p>
+
+<p>Sumamos en el lado derecho: 600 + 600 = 1200</p>
+
+<p>1000r<sup>2</sup> + 2000r + 1000 = 1200 + 600r</p>
+
+<p><strong>Paso 2 — Pasar todo a un solo lado (forma ax<sup>2</sup> + bx + c = 0):</strong></p>
+
+<p>1000r<sup>2</sup> + 2000r + 1000 − 1200 − 600r = 0</p>
+
+<p>1000r<sup>2</sup> + 1400r − 200 = 0</p>
+
+<p>Dividimos entre 100 para simplificar:</p>
+
+<p>10r<sup>2</sup> + 14r − 2 = 0</p>
+
+<p>Aquí a = 10, b = 14, c = −2 → ecuación cuadrática completa.</p>
+
+<p><strong>Paso 3 — Resolver con la fórmula cuadrática:</strong></p>
+
+<p>r = [−b ± √(b<sup>2</sup> − 4ac)] / 2a = [−14 ± √(14<sup>2</sup> − 4·10·(−2))] / (2·10)</p>
+
+<p>Calculamos el discriminante:</p>
+
+<p>14<sup>2</sup> − 4·10·(−2) = 196 + 80 = 276</p>
+
+<p>√276 ≈ 16.613246</p>
+
+<p>Entonces:</p>
+
+<p>r<sub>1</sub> = (−14 + 16.613246) / 20 ≈ 0.1307 (13.07%)</p>
+
+<p>r<sub>2</sub> = (−14 − 16.613246) / 20 ≈ −1.5307</p>
+
+<p><strong>Interpretación:</strong> la TIR negativa no tiene sentido práctico, así que tomamos la positiva: r ≈ 0.1307, es decir, la inversión rinde aproximadamente 13.07% anual.</p>
+
+
+</section>
+
+
+
+
+<section id="app-incompleta-ing" class="card info" style="margin-top:18px">
+        <h2>Cuadrática incompleta Ingeniería</h2>
+<p><strong>Cuadrática incompleta (Ingeniería: dimensión de una pieza)</strong></p>
+
+<p>Contexto: Diseñas una pieza cuadrada cuya área debe ser 36 cm². Si el lado mide <strong>x</strong> cm, la relación es:</p>
+
+<p>x<sup>2</sup> − 36 = 0</p>
+
+<p>Esta es una ecuación cuadrática incompleta porque falta el término lineal (<strong>b·x</strong>).</p>
+
+<p><strong>Paso 1 — Despejar x²:</strong></p>
+
+<p>x² = 36</p>
+
+<p><strong>Paso 2 — Aplicar raíz cuadrada (considerar ambas raíces):</strong></p>
+
+<p>x = ±√36 = ±6</p>
+
+<p><strong>Interpretación física:</strong> una dimensión no puede ser negativa, así que tomamos la solución positiva:</p>
+
+<p>x = 6 cm</p>
+
+</section>
+    </main>
+  </div>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamb = document.getElementById('hamb');
+  const mainNav = document.getElementById('mainNav');
+
+  // 🔹 función para forzar cierre dropdowns (vence :hover)
+  function forceCloseDropdowns(duration = 400) {
+    document.querySelectorAll('.dropdown-menu').forEach(m => {
+      m.classList.add('force-close');
+    });
+    setTimeout(() => {
+      document.querySelectorAll('.dropdown-menu.force-close').forEach(m => {
+        m.classList.remove('force-close');
+      });
+    }, duration);
+  }
+
+  // 🔹 DROPDOWN toggle solo en móvil
+  document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+    toggle.addEventListener('click', e => {
+      if (window.innerWidth <= 768) {
+        // móvil → click abre/cierra
+        e.preventDefault();
+        const menu = toggle.parentElement.querySelector('.dropdown-menu');
+        const shown = menu.style.display === 'block';
+
+        // cerrar otros
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
+        menu.style.display = shown ? 'none' : 'block';
+      } else {
+        // desktop → click en enlace dentro dropdown cierra forzadamente
+        forceCloseDropdowns(400);
+      }
+    });
+  });
+
+  // 🔹 Cerrar dropdown si clic fuera
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.dropdown')) {
+      if (window.innerWidth <= 768) {
+        // móvil
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
+      } else {
+        // desktop
+        forceCloseDropdowns(200);
+      }
+    }
+  });
+
+  // 🔹 HAMBURGUESA / MENÚ MÓVIL
+  if (hamb) {
+    hamb.addEventListener('click', () => {
+      mainNav.classList.toggle('show');
+      if (mainNav.classList.contains('show')) {
+        mainNav.style.display = 'flex';
+        mainNav.style.flexDirection = 'column';
+        mainNav.style.gap = '8px';
+      } else {
+        mainNav.style.display = '';
+      }
+    });
+  }
+
+  // 🔹 Cerrar menú móvil al clicar un enlace NORMAL (no dropdown-toggle)
+  document.querySelectorAll('#mainNav a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768 && !link.classList.contains('dropdown-toggle')) {
+        mainNav.classList.remove('show');
+        mainNav.style.display = '';
+        // cerrar dropdowns también
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
+      } else {
+        // desktop: forzar cierre dropdowns después de click
+        forceCloseDropdowns(400);
+      }
+    });
+  });
+
+  // 🔹 SCROLL SUAVE + MOSTRAR SECCIONES
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href").substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      document.querySelectorAll("section.card.info").forEach(section => {
+        section.classList.remove("active");
+      });
+
+      if (targetSection) {
+        targetSection.classList.add("active");
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+
+  // Mostrar primera sección al cargar
+  const firstSection = document.querySelector("section.card.info");
+  if (firstSection) firstSection.classList.add("active");
+
+  // 🔹 REAJUSTE AL CAMBIAR TAMAÑO
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      // reset estilos móvil
+      document.querySelectorAll('.dropdown-menu').forEach(menu => menu.style.display = '');
+      mainNav.classList.remove('show');
+      mainNav.style.display = '';
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+  
+</body>
+
+</html>
